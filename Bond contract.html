@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Strong Bond Contract Services ✨</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+:root {
+  --mint: #A8E6CF;
+  --mint-dark: #7CCBA2;
+  --mint-light: #D4F5E6;
+  --blue: #B8D4E3;
+  --blue-light: #D9ECF5;
+  --lavender: #C3B1E1;
+  --lavender-light: #E0D4F0;
+  --lavender-dark: #9B85C4;
+  --pink: #FFB7C5;
+  --pink-light: #FFDDE4;
+  --cream: #FFF8F0;
+  --paper: #FFFDF7;
+  --text: #5A5A7A;
+  --text-light: #8A8AAA;
+  --gold: #FFD700;
+  --shadow: rgba(90, 90, 122, 0.12);
+  --shadow-lg: rgba(90, 90, 122, 0.18);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{overflow:hidden;height:100%;font-family:'Nunito',sans-serif;color:var(--text);background:var(--cream);}
+::-webkit-scrollbar{display:none;}
+
+/* ───── Floating Background ───── */
+.floating-bg{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
+.floater{position:absolute;opacity:0.35;animation:floatAround linear infinite;}
+.floater.star{font-size:1.2rem;}
+.floater.circle{width:12px;height:12px;border-radius:50%;background:var(--pink-light);}
+.floater.diamond{width:10px;height:10px;background:var(--lavender-light);transform:rotate(45deg);}
+.floater.dot{width:6px;height:6px;border-radius:50%;background:var(--mint);}
+@keyframes floatAround{
+  0%{transform:translateY(100vh) rotate(0deg);opacity:0;}
+  10%{opacity:0.4;}
+  90%{opacity:0.4;}
+  100%{transform:translateY(-10vh) rotate(360deg);opacity:0;}
+}
+
+/* ───── Nav Dots ───── */
+.nav-dots{position:fixed;right:1.2rem;top:50%;transform:translateY(-50%);z-index:100;display:flex;flex-direction:column;gap:12px;}
+.nav-dot{width:12px;height:12px;border-radius:50%;background:var(--lavender-light);border:2px solid var(--lavender);cursor:pointer;transition:all .4s ease;position:relative;}
+.nav-dot.active{background:var(--lavender);transform:scale(1.3);box-shadow:0 0 12px rgba(195,177,225,.5);}
+.nav-dot:hover{transform:scale(1.2);}
+.nav-dot.locked{opacity:.35;cursor:not-allowed;}
+
+/* ───── Slide Container ───── */
+.slides-wrapper{width:100%;height:100vh;position:relative;z-index:1;transition:transform .85s cubic-bezier(.65,0,.35,1);}
+.slide{width:100%;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.5rem;position:relative;overflow:hidden;}
+
+/* ═══════ SLIDE 1 ═══════ */
+.slide-1{background:linear-gradient(160deg,#FFF8F0 0%,#E8F8EE 40%,#E0ECFA 100%);}
+.slide-1::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,var(--mint-light) 0%,transparent 70%);border-radius:50%;z-index:0;}
+.slide-1::after{content:'';position:absolute;bottom:-80px;left:-40px;width:250px;height:250px;background:radial-gradient(circle,var(--lavender-light) 0%,transparent 70%);border-radius:50%;z-index:0;}
+
+.contract-header{position:relative;z-index:1;text-align:center;max-width:600px;}
+.stamp{display:inline-block;margin-bottom:1.2rem;animation:stampIn 1s ease-out forwards, gentleFloat 4s ease-in-out infinite 1s;}
+.stamp-inner{width:90px;height:90px;border:4px dashed var(--lavender);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2.4rem;background:rgba(195,177,225,.12);position:relative;}
+.stamp-inner::before{content:'';position:absolute;inset:4px;border:2px solid var(--lavender-light);border-radius:50%;}
+@keyframes stampIn{0%{transform:scale(3) rotate(-30deg);opacity:0;}60%{transform:scale(.9) rotate(3deg);}100%{transform:scale(1) rotate(0);opacity:1;}}
+@keyframes gentleFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+
+.s1-title{font-family:'Fredoka One',cursive;font-size:clamp(1.6rem,5vw,2.6rem);color:var(--text);line-height:1.3;margin-bottom:.6rem;}
+.s1-title .highlight{background:linear-gradient(135deg,var(--mint) 0%,var(--blue) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.s1-sub{font-family:'Patrick Hand',cursive;font-size:clamp(1rem,3vw,1.35rem);color:var(--text-light);margin-bottom:2rem;letter-spacing:.3px;}
+.s1-doodle{position:absolute;opacity:.18;font-size:2rem;z-index:0;}
+.s1-doodle.d1{top:12%;left:8%;animation:wiggle 3s ease-in-out infinite;}
+.s1-doodle.d2{top:18%;right:10%;animation:wiggle 3.5s ease-in-out infinite .5s;}
+.s1-doodle.d3{bottom:15%;left:12%;animation:wiggle 4s ease-in-out infinite 1s;}
+.s1-doodle.d4{bottom:20%;right:8%;animation:wiggle 3s ease-in-out infinite 1.5s;}
+@keyframes wiggle{0%,100%{transform:rotate(-5deg);}50%{transform:rotate(5deg);}}
+
+.cta-btn{position:relative;z-index:1;padding:1rem 2.4rem;border:none;border-radius:50px;font-family:'Fredoka One',cursive;font-size:clamp(.95rem,2.5vw,1.15rem);color:#fff;background:linear-gradient(135deg,var(--mint-dark),var(--lavender));cursor:pointer;box-shadow:0 6px 25px rgba(124,203,162,.35);transition:all .3s ease;letter-spacing:.5px;overflow:hidden;}
+.cta-btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);transition:left .5s ease;}
+.cta-btn:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 10px 35px rgba(124,203,162,.45);}
+.cta-btn:hover::before{left:100%;}
+.cta-btn:active{transform:translateY(-1px) scale(.98);}
+.cta-btn .btn-icon{margin-left:.5rem;display:inline-block;animation:bounceRight 1.5s ease-in-out infinite;}
+@keyframes bounceRight{0%,100%{transform:translateX(0);}50%{transform:translateX(5px);}}
+
+/* ═══════ SLIDE 2 ═══════ */
+.slide-2{background:linear-gradient(170deg,#FFFDF7 0%,#F5F0FF 50%,#EEF7FF 100%);padding:1.5rem;}
+.slide-2::before{content:'';position:absolute;inset:0;background-image:
+  repeating-linear-gradient(0deg,transparent,transparent 27px,rgba(195,177,225,.08) 27px,rgba(195,177,225,.08) 28px),
+  repeating-linear-gradient(90deg,transparent,transparent 27px,rgba(195,177,225,.05) 27px,rgba(195,177,225,.05) 28px);
+pointer-events:none;}
+
+.s2-container{position:relative;z-index:1;max-width:700px;width:100%;text-align:center;}
+.s2-title{font-family:'Fredoka One',cursive;font-size:clamp(1.4rem,4vw,2rem);margin-bottom:.3rem;}
+.s2-title .quill{display:inline-block;margin-right:.4rem;}
+.s2-sub{font-family:'Patrick Hand',cursive;color:var(--text-light);font-size:clamp(.85rem,2.5vw,1.05rem);margin-bottom:1.5rem;}
+
+.clauses-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;width:100%;}
+.clause-card{background:#fff;border-radius:18px;padding:1.2rem 1rem;text-align:center;border:2px dashed transparent;position:relative;cursor:default;transition:all .4s ease;opacity:0;transform:translateY(30px);box-shadow:0 4px 20px var(--shadow);}
+.clause-card.visible{opacity:1;transform:translateY(0);}
+.clause-card:nth-child(1){border-color:var(--mint);transition-delay:.1s;}
+.clause-card:nth-child(2){border-color:var(--blue);transition-delay:.25s;}
+.clause-card:nth-child(3){border-color:var(--lavender);transition-delay:.4s;}
+.clause-card:nth-child(4){border-color:var(--pink);transition-delay:.55s;}
+.clause-card:hover{transform:translateY(-5px) scale(1.03);box-shadow:0 8px 30px var(--shadow-lg);}
+
+.clause-icon{font-size:2.2rem;margin-bottom:.5rem;display:block;}
+.clause-label{font-family:'Fredoka One',cursive;font-size:clamp(.78rem,2vw,.95rem);margin-bottom:.35rem;line-height:1.3;}
+.clause-card:nth-child(1) .clause-label{color:var(--mint-dark);}
+.clause-card:nth-child(2) .clause-label{color:#6BA3BE;}
+.clause-card:nth-child(3) .clause-label{color:var(--lavender-dark);}
+.clause-card:nth-child(4) .clause-label{color:#E8859A;}
+.clause-text{font-size:clamp(.7rem,1.8vw,.82rem);color:var(--text-light);line-height:1.45;}
+.clause-number{position:absolute;top:-.5rem;left:-.5rem;width:28px;height:28px;border-radius:50%;font-family:'Fredoka One',cursive;font-size:.75rem;display:flex;align-items:center;justify-content:center;color:#fff;}
+.clause-card:nth-child(1) .clause-number{background:var(--mint-dark);}
+.clause-card:nth-child(2) .clause-number{background:var(--blue);}
+.clause-card:nth-child(3) .clause-number{background:var(--lavender);}
+.clause-card:nth-child(4) .clause-number{background:var(--pink);}
+
+.s2-next{margin-top:1.5rem;padding:.75rem 2rem;border:2.5px solid var(--lavender);background:transparent;border-radius:50px;font-family:'Fredoka One',cursive;font-size:clamp(.85rem,2.2vw,1rem);color:var(--lavender-dark);cursor:pointer;transition:all .3s ease;}
+.s2-next:hover{background:var(--lavender);color:#fff;transform:translateY(-2px);}
+
+/* ═══════ SLIDE 3 ═══════ */
+.slide-3{background:linear-gradient(160deg,#F5F0FF 0%,#E8F8EE 50%,#FFEEF2 100%);}
+.s3-container{text-align:center;max-width:480px;position:relative;z-index:1;}
+.s3-note{font-family:'Patrick Hand',cursive;font-size:clamp(1rem,3vw,1.25rem);color:var(--text);margin-bottom:.5rem;line-height:1.5;background:#fff;padding:1.2rem 1.5rem;border-radius:16px;border:2px dashed var(--lavender-light);box-shadow:0 4px 15px var(--shadow);position:relative;}
+.s3-note .pin{position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:1.5rem;}
+.s3-note strong{color:var(--lavender-dark);}
+.s3-warning{font-size:.8rem;color:var(--pink);margin:1rem 0 1.5rem;font-weight:700;animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.5;}}
+
+/* Fingerprint Scanner */
+.fingerprint-area{position:relative;width:170px;height:170px;margin:0 auto;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.fp-ring-bg{position:absolute;inset:0;border-radius:50%;border:4px solid var(--lavender-light);}
+.fp-ring-progress{position:absolute;inset:0;}
+.fp-ring-progress svg{width:100%;height:100%;transform:rotate(-90deg);}
+.fp-ring-progress circle{fill:none;stroke:var(--mint-dark);stroke-width:4;stroke-dasharray:502;stroke-dashoffset:502;stroke-linecap:round;transition:stroke-dashoffset 2.5s ease-in-out;}
+.fp-ring-progress.scanning circle{stroke-dashoffset:0;}
+
+.fp-center{position:absolute;inset:12px;border-radius:50%;background:rgba(255,255,255,.85);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 4px 20px var(--shadow);transition:all .4s ease;}
+.fp-icon{transition:all .4s ease;}
+.fp-icon svg{width:60px;height:72px;}
+.fp-icon svg path{stroke:var(--lavender);transition:stroke .4s ease;}
+.fp-label{font-family:'Fredoka One',cursive;font-size:.7rem;color:var(--text-light);margin-top:.3rem;letter-spacing:.5px;}
+.fp-scan-line{position:absolute;left:15%;right:15%;height:3px;background:linear-gradient(90deg,transparent,var(--mint),var(--mint-dark),var(--mint),transparent);border-radius:2px;opacity:0;top:50%;transform:translateY(-50%);}
+.scanning .fp-scan-line{animation:scanLine 1.8s ease-in-out infinite;opacity:1;}
+@keyframes scanLine{0%{top:20%;opacity:0;}10%{opacity:1;}90%{opacity:1;}100%{top:78%;opacity:0;}}
+
+.fp-glow{position:absolute;inset:-8px;border-radius:50%;background:radial-gradient(circle,rgba(168,230,207,.3) 0%,transparent 70%);opacity:0;transition:opacity .5s ease;}
+.scanning .fp-glow{opacity:1;animation:glowPulse 1.5s ease-in-out infinite;}
+@keyframes glowPulse{0%,100%{transform:scale(1);opacity:.6;}50%{transform:scale(1.1);opacity:1;}}
+
+.fp-success{position:absolute;inset:12px;border-radius:50%;background:var(--mint);display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.5);transition:all .5s cubic-bezier(.34,1.56,.64,1);}
+.fp-success.show{opacity:1;transform:scale(1);}
+.fp-success svg{width:50px;height:50px;}
+.fp-success svg path{stroke:#fff;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;fill:none;stroke-dasharray:60;stroke-dashoffset:60;}
+.fp-success.show svg path{animation:drawCheck .5s ease forwards .2s;}
+@keyframes drawCheck{to{stroke-dashoffset:0;}}
+
+/* ═══════ SLIDE 4 ═══════ */
+.slide-4{background:linear-gradient(160deg,#E8F8EE 0%,#F5F0FF 40%,#FFEEF2 100%);}
+.s4-container{text-align:center;max-width:520px;position:relative;z-index:2;opacity:0;transform:translateY(40px);transition:all .8s ease;}
+.s4-container.visible{opacity:1;transform:translateY(0);}
+
+.badge-container{margin-bottom:1.5rem;position:relative;display:inline-block;}
+.badge{width:160px;height:160px;position:relative;animation:badgeDrop .8s cubic-bezier(.34,1.56,.64,1) forwards;transform:scale(0);}
+.badge.visible{transform:scale(1);}
+.badge-outer{position:absolute;inset:0;}
+.badge-outer svg{width:100%;height:100%;}
+.badge-inner{position:absolute;inset:18px;border-radius:50%;background:linear-gradient(135deg,var(--mint-light),var(--lavender-light));display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:inset 0 2px 8px rgba(0,0,0,.06);}
+.badge-emoji{font-size:2rem;margin-bottom:.15rem;}
+.badge-text{font-family:'Fredoka One',cursive;font-size:.65rem;color:var(--text);letter-spacing:.5px;line-height:1.3;}
+.badge-text span{display:block;font-size:.85rem;color:var(--lavender-dark);}
+
+.badge-ribbon{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);display:flex;gap:4px;}
+.badge-ribbon div{width:18px;height:28px;border-radius:0 0 4px 4px;}
+.badge-ribbon div:first-child{background:var(--mint);transform:rotate(-8deg);}
+.badge-ribbon div:last-child{background:var(--lavender);transform:rotate(8deg);}
+
+@keyframes badgeDrop{0%{transform:scale(0) rotate(-20deg);}70%{transform:scale(1.1) rotate(3deg);}100%{transform:scale(1) rotate(0);}}
+
+.s4-title{font-family:'Fredoka One',cursive;font-size:clamp(1.3rem,4vw,1.9rem);margin-bottom:.6rem;line-height:1.3;}
+.s4-title .green{color:var(--mint-dark);}
+.s4-msg{font-family:'Patrick Hand',cursive;font-size:clamp(.95rem,2.8vw,1.2rem);color:var(--text-light);line-height:1.5;margin-bottom:1.5rem;}
+.s4-emojis{font-size:1.8rem;letter-spacing:.4rem;animation:emojiWave 2s ease-in-out infinite;}
+@keyframes emojiWave{0%,100%{transform:translateY(0);}25%{transform:translateY(-5px);}75%{transform:translateY(3px);}}
+
+.s4-sparkle{position:absolute;font-size:1.5rem;opacity:0;animation:sparkle 2s ease-in-out infinite;}
+.s4-sparkle:nth-child(1){top:10%;left:10%;animation-delay:0s;}
+.s4-sparkle:nth-child(2){top:8%;right:12%;animation-delay:.4s;}
+.s4-sparkle:nth-child(3){bottom:15%;left:8%;animation-delay:.8s;}
+.s4-sparkle:nth-child(4){bottom:12%;right:10%;animation-delay:1.2s;}
+.s4-sparkle:nth-child(5){top:50%;left:3%;animation-delay:.6s;}
+.s4-sparkle:nth-child(6){top:45%;right:5%;animation-delay:1s;}
+@keyframes sparkle{0%,100%{opacity:0;transform:scale(.5) rotate(0);}50%{opacity:.8;transform:scale(1.2) rotate(180deg);}}
+
+/* ───── Confetti Canvas ───── */
+#confettiCanvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:50;opacity:0;transition:opacity .3s ease;}
+#confettiCanvas.active{opacity:1;}
+
+/* ───── Responsive ───── */
+@media(max-width:600px){
+  .clauses-grid{grid-template-columns:1fr;gap:.8rem;max-height:55vh;overflow-y:auto;padding:.5rem;-webkit-overflow-scrolling:touch;}
+  .clauses-grid::-webkit-scrollbar{width:4px;}
+  .clauses-grid::-webkit-scrollbar-thumb{background:var(--lavender-light);border-radius:4px;}
+  .clause-card{padding:1rem .8rem;}
+  .clause-icon{font-size:1.8rem;}
+  .nav-dots{right:.7rem;gap:10px;}
+  .nav-dot{width:10px;height:10px;}
+  .slide{padding:1.5rem 1rem;}
+  .s3-note{padding:1rem 1.2rem;font-size:clamp(.9rem,2.5vw,1.1rem);}
+  .fingerprint-area{width:140px;height:140px;}
+  .fp-icon svg{width:48px;height:58px;}
+  .badge{width:130px;height:130px;}
+  .stamp-inner{width:72px;height:72px;font-size:1.8rem;}
+}
+
+@media(max-width:380px){
+  .s1-title{font-size:1.4rem;}
+  .cta-btn{padding:.8rem 1.6rem;font-size:.85rem;}
+}
+
+@media(min-width:601px) and (max-width:900px){
+  .clauses-grid{gap:.8rem;}
+}
+
+/* ───── Print / Prefers-reduced-motion ───── */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:0.01s!important;transition-duration:0.01s!important;}
+}
+</style>
+</head>
+<body>
+
+<!-- Floating Background Elements -->
+<div class="floating-bg" id="floatingBg"></div>
+
+<!-- Navigation Dots -->
+<div class="nav-dots" id="navDots"></div>
+
+<!-- Confetti Canvas -->
+<canvas id="confettiCanvas"></canvas>
+
+<!-- ═══════════ SLIDES ═══════════ -->
+<div class="slides-wrapper" id="slidesWrapper">
+
+  <!-- ───── SLIDE 1: WELCOME ───── -->
+  <div class="slide slide-1" id="slide-0">
+    <span class="s1-doodle d1">📝</span>
+    <span class="s1-doodle d2">⭐</span>
+    <span class="s1-doodle d3">🤝</span>
+    <span class="s1-doodle d4">✨</span>
+
+    <div class="contract-header">
+      <div class="stamp">
+        <div class="stamp-inner">📜</div>
+      </div>
+      <h1 class="s1-title">Welcome to our<br><span class="highlight">Strong Bond Contract Services!</span></h1>
+      <p class="s1-sub">Where friendship is official and fun is guaranteed. ✨</p>
+      <button class="cta-btn" onclick="goToSlide(1)">
+        Let's Read the Contract First <span class="btn-icon">→</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ───── SLIDE 2: CLAUSES ───── -->
+  <div class="slide slide-2" id="slide-1">
+    <div class="s2-container">
+      <h2 class="s2-title"><span class="quill">🖊️</span> Official Friendship Clauses</h2>
+      <p class="s2-sub">Read carefully — these are non-negotiable! 😤📋</p>
+
+      <div class="clauses-grid" id="clausesGrid">
+        <!-- Clause 1 -->
+        <div class="clause-card" id="clause1">
+          <span class="clause-number">§1</span>
+          <span class="clause-icon">😁</span>
+          <h3 class="clause-label">The Braces Rule</h3>
+          <p class="clause-text">That signature braces-filled smile that brightens up the day. Mandatory display at all times!</p>
+        </div>
+        <!-- Clause 2 -->
+        <div class="clause-card" id="clause2">
+          <span class="clause-number">§2</span>
+          <span class="clause-icon">🧸</span>
+          <h3 class="clause-label">The Inner Child Policy</h3>
+          <p class="clause-text">For the constant childish behavior that keeps things lively. Growing up is overrated anyway!</p>
+        </div>
+        <!-- Clause 3 -->
+        <div class="clause-card" id="clause3">
+          <span class="clause-number">§3</span>
+          <span class="clause-icon">💬</span>
+          <h3 class="clause-label">The Openness Clause</h3>
+          <p class="clause-text">For being real and open about everything. No filters, no walls — just honest vibes.</p>
+        </div>
+        <!-- Clause 4 -->
+        <div class="clause-card" id="clause4">
+          <span class="clause-number">§4</span>
+          <span class="clause-icon">⚡</span>
+          <h3 class="clause-label">The High Energy Mandate</h3>
+          <p class="clause-text">For that always excited and 'mast' mood. Low energy? We don't know her!</p>
+        </div>
+      </div>
+
+      <button class="s2-next" onclick="goToSlide(2)">I Accept All Clauses ✅</button>
+    </div>
+  </div>
+
+  <!-- ───── SLIDE 3: AGREEMENT ───── -->
+  <div class="slide slide-3" id="slide-2">
+    <div class="s3-container">
+      <div class="s3-note">
+        <span class="pin">📌</span>
+        <strong>Wait!</strong> Before you sign:<br>
+        Only place your finger here if you agree to keep this bond <strong>strong forever</strong>.
+      </div>
+      <p class="s3-warning">⚠️ This action is IRREVERSIBLE ⚠️</p>
+
+      <div class="fingerprint-area" id="fingerprintArea">
+        <div class="fp-glow"></div>
+        <div class="fp-ring-bg"></div>
+        <div class="fp-ring-progress" id="fpRingProgress">
+          <svg viewBox="0 0 170 170">
+            <circle cx="85" cy="85" r="80"/>
+          </svg>
+        </div>
+        <div class="fp-center" id="fpCenter">
+          <div class="fp-icon">
+            <svg viewBox="0 0 60 72" fill="none">
+              <path d="M30 8 C16 8 8 18 8 30 L8 40 C8 48 10 54 14 60" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M30 8 C44 8 52 18 52 30 L52 40 C52 48 50 54 46 60" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M30 16 C20 16 14 24 14 32 L14 40 C14 46 16 52 20 57" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M30 16 C40 16 46 24 46 32 L46 40 C46 46 44 52 40 57" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M30 24 C24 24 20 29 20 34 L20 40 C20 44 22 49 26 53" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M30 24 C36 24 40 29 40 34 L40 40 C40 44 38 49 34 53" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M30 32 C28 32 26 34 26 37 C26 40 28 44 30 47" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M30 32 C32 32 34 34 34 37 C34 40 32 44 30 47" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <span class="fp-label">TAP TO SIGN</span>
+          <div class="fp-scan-line"></div>
+        </div>
+        <div class="fp-success" id="fpSuccess">
+          <svg viewBox="0 0 50 50">
+            <path d="M12 26 L22 36 L38 16"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── SLIDE 4: SUCCESS ───── -->
+  <div class="slide slide-4" id="slide-3">
+    <span class="s4-sparkle">✨</span>
+    <span class="s4-sparkle">🌟</span>
+    <span class="s4-sparkle">💫</span>
+    <span class="s4-sparkle">⭐</span>
+    <span class="s4-sparkle">✨</span>
+    <span class="s4-sparkle">🌟</span>
+
+    <div class="s4-container" id="s4Container">
+      <div class="badge-container">
+        <div class="badge" id="badge">
+          <div class="badge-outer">
+            <svg viewBox="0 0 160 160">
+              <path d="M80 5 L90 20 L108 10 L110 28 L128 24 L124 42 L142 44 L132 58 L148 68 L134 78 L146 92 L128 96 L136 112 L118 110 L120 128 L102 120 L98 138 L82 126 L74 142 L62 128 L50 138 L44 120 L28 128 L30 110 L12 112 L20 96 L4 92 L18 78 L4 68 L18 58 L4 44 L22 42 L18 24 L36 28 L38 10 L54 20 L60 5 L70 18 Z"
+                fill="none" stroke="var(--gold)" stroke-width="2.5" opacity=".7"/>
+              <circle cx="80" cy="80" r="58" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-dasharray="4 4" opacity=".4"/>
+            </svg>
+          </div>
+          <div class="badge-inner">
+            <span class="badge-emoji">🤝</span>
+            <div class="badge-text">CERTIFIED<span>BESTIES</span></div>
+          </div>
+          <div class="badge-ribbon">
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="s4-title">Congratulations, Prisha! 🎉<br>Our bond is now <span class="green">officially & legally STRONG</span>.</h2>
+      <p class="s4-msg">No exits allowed! This contract is sealed, stamped, and sparkle-approved. Bestie status: PERMANENT. 🤝✨</p>
+      <div class="s4-emojis">🎊 🥳 🎉 💪 🌟</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ═══════════════════════════════════════════
+   ═══        STRONG BOND CONTRACT        ═══
+   ═══════════════════════════════════════════ */
+
+// ───── State ─────
+let currentSlide = 0;
+const totalSlides = 4;
+let isTransitioning = false;
+let slide4Unlocked = false;
+let fingerprintScanning = false;
+const wrapper = document.getElementById('slidesWrapper');
+
+// ───── Init ─────
+document.addEventListener('DOMContentLoaded', () => {
+  createNavDots();
+  createFloaters();
+  setupFingerprint();
+  setupScrollNav();
+  setupKeyNav();
+  setupSwipeNav();
+  triggerSlideAnimations(0);
+});
+
+// ───── Navigation ─────
+function goToSlide(n) {
+  if (isTransitioning || n < 0 || n >= totalSlides) return;
+  if (n === 3 && !slide4Unlocked) return;
+
+  isTransitioning = true;
+  currentSlide = n;
+  wrapper.style.transform = `translateY(-${n * 100}vh)`;
+  updateNavDots();
+  triggerSlideAnimations(n);
+
+  setTimeout(() => { isTransitioning = false; }, 900);
+}
+
+// ───── Nav Dots ─────
+function createNavDots() {
+  const container = document.getElementById('navDots');
+  for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'nav-dot' + (i === 0 ? ' active' : '') + (i === 3 ? ' locked' : '');
+    dot.dataset.slide = i;
+    dot.addEventListener('click', () => {
+      if (i === 3 && !slide4Unlocked) return;
+      goToSlide(i);
+    });
+    container.appendChild(dot);
+  }
+}
+
+function updateNavDots() {
+  document.querySelectorAll('.nav-dot').forEach((dot, i) => {
+    dot.classList.toggle('active', i === currentSlide);
+    if (i === 3) dot.classList.toggle('locked', !slide4Unlocked);
+  });
+}
+
+// ───── Slide Animations ─────
+function triggerSlideAnimations(n) {
+  if (n === 1) {
+    setTimeout(() => {
+      document.querySelectorAll('.clause-card').forEach(card => card.classList.add('visible'));
+    }, 300);
+  }
+  if (n === 3) {
+    const s4 = document.getElementById('s4Container');
+    const badge = document.getElementById('badge');
+    setTimeout(() => { s4.classList.add('visible'); }, 200);
+    setTimeout(() => { badge.classList.add('visible'); }, 500);
+  }
+}
+
+// ───── Scroll Navigation ─────
+function setupScrollNav() {
+  let lastWheel = 0;
+  window.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    const now = Date.now();
+    if (now - lastWheel < 1000) return;
+    lastWheel = now;
+
+    if (e.deltaY > 30) {
+      if (currentSlide === 2 && !slide4Unlocked) return;
+      goToSlide(currentSlide + 1);
+    } else if (e.deltaY < -30) {
+      goToSlide(currentSlide - 1);
+    }
+  }, { passive: false });
+}
+
+// ───── Keyboard Navigation ─────
+function setupKeyNav() {
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+      if (currentSlide === 2 && !slide4Unlocked) return;
+      goToSlide(currentSlide + 1);
+    }
+    if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+      goToSlide(currentSlide - 1);
+    }
+  });
+}
+
+// ───── Swipe Navigation ─────
+function setupSwipeNav() {
+  let touchStartY = 0;
+  let touchStartX = 0;
+
+  window.addEventListener('touchstart', (e) => {
+    // Don't intercept touches on the clauses grid (for scrolling)
+    if (e.target.closest('.clauses-grid')) return;
+    touchStartY = e.touches[0].clientY;
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+
+  window.addEventListener('touchend', (e) => {
+    if (e.target.closest('.clauses-grid')) return;
+    const dy = touchStartY - e.changedTouches[0].clientY;
+    const dx = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(dy) < 50 || Math.abs(dx) > Math.abs(dy)) return;
+
+    if (dy > 0) {
+      if (currentSlide === 2 && !slide4Unlocked) return;
+      goToSlide(currentSlide + 1);
+    } else {
+      goToSlide(currentSlide - 1);
+    }
+  }, { passive: true });
+}
+
+// ───── Fingerprint Scanner ─────
+function setupFingerprint() {
+  const area = document.getElementById('fingerprintArea');
+  const ring = document.getElementById('fpRingProgress');
+  const center = document.getElementById('fpCenter');
+  const success = document.getElementById('fpSuccess');
+
+  area.addEventListener('click', () => {
+    if (fingerprintScanning || slide4Unlocked) return;
+    fingerprintScanning = true;
+
+    // Start scanning animation
+    area.classList.add('scanning');
+    ring.classList.add('scanning');
+
+    // After scanning completes
+    setTimeout(() => {
+      // Show success checkmark
+      center.style.opacity = '0';
+      success.classList.add('show');
+      area.classList.remove('scanning');
+
+      // Unlock slide 4 and navigate
+      setTimeout(() => {
+        slide4Unlocked = true;
+        updateNavDots();
+        goToSlide(3);
+        launchConfetti();
+      }, 800);
+
+    }, 2600);
+  });
+}
+
+// ───── Floating Background Elements ─────
+function createFloaters() {
+  const container = document.getElementById('floatingBg');
+  const items = ['✨','⭐','·','◇','○','★','✦','♦'];
+  const types = ['star','dot','diamond','circle','star','dot','star','diamond'];
+  const count = 35;
+
+  for (let i = 0; i < count; i++) {
+    const el = document.createElement('div');
+    const idx = i % items.length;
+    el.className = `floater ${types[idx]}`;
+    if (types[idx] === 'star') el.textContent = items[idx];
+
+    el.style.left = Math.random() * 100 + '%';
+    el.style.animationDuration = (12 + Math.random() * 18) + 's';
+    el.style.animationDelay = (Math.random() * 15) + 's';
+    el.style.fontSize = (.6 + Math.random() * 1) + 'rem';
+
+    if (types[idx] === 'circle') {
+      const colors = ['var(--pink-light)','var(--mint-light)','var(--lavender-light)','var(--blue-light)'];
+      el.style.background = colors[Math.floor(Math.random()*colors.length)];
+      el.style.width = (6 + Math.random()*10) + 'px';
+      el.style.height = el.style.width;
+    }
+    if (types[idx] === 'diamond') {
+      const colors = ['var(--lavender-light)','var(--mint-light)','var(--pink-light)'];
+      el.style.background = colors[Math.floor(Math.random()*colors.length)];
+    }
+
+    container.appendChild(el);
+  }
+}
+
+// ───── Confetti System ─────
+function launchConfetti() {
+  const canvas = document.getElementById('confettiCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.classList.add('active');
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const colors = [
+    '#A8E6CF','#7CCBA2','#B8D4E3','#C3B1E1','#FFB7C5',
+    '#FFD700','#87CEEB','#DDA0DD','#98FB98','#FFA07A',
+    '#FFDDE4','#D4F5E6','#E0D4F0'
+  ];
+
+  const particles = [];
+  const particleCount = 200;
+
+  class Particle {
+    constructor() { this.reset(true); }
+    reset(initial = false) {
+      this.x = Math.random() * canvas.width;
+      this.y = initial ? Math.random() * -canvas.height : -20;
+      this.vx = (Math.random() - 0.5) * 4;
+      this.vy = Math.random() * 3 + 2;
+      this.color = colors[Math.floor(Math.random() * colors.length)];
+      this.size = Math.random() * 8 + 4;
+      this.rotation = Math.random() * 360;
+      this.rotationSpeed = (Math.random() - 0.5) * 8;
+      this.shape = Math.floor(Math.random() * 3);
+      this.wobble = Math.random() * 10;
+      this.wobbleSpeed = Math.random() * 0.05 + 0.02;
+      this.opacity = 1;
+      this.life = 0;
+    }
+    update() {
+      this.life++;
+      this.x += this.vx + Math.sin(this.wobble) * 0.5;
+      this.y += this.vy;
+      this.wobble += this.wobbleSpeed;
+      this.rotation += this.rotationSpeed;
+      this.vy += 0.02;
+      this.vx *= 0.999;
+      if (this.y > canvas.height + 20) {
+        if (this.life < 400) { this.reset(); }
+        else { this.opacity = 0; }
+      }
+    }
+    draw() {
+      if (this.opacity <= 0) return;
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate((this.rotation * Math.PI) / 180);
+      ctx.globalAlpha = this.opacity;
+      ctx.fillStyle = this.color;
+
+      if (this.shape === 0) {
+        ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size * 0.6);
+      } else if (this.shape === 1) {
+        ctx.beginPath();
+        ctx.arc(0, 0, this.size / 2, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        ctx.beginPath();
+        ctx.moveTo(0, -this.size / 2);
+        ctx.lineTo(this.size / 2, this.size / 2);
+        ctx.lineTo(-this.size / 2, this.size / 2);
+        ctx.closePath();
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+  }
+
+  for (let i = 0; i < particleCount; i++) {
+    particles.push(new Particle());
+  }
+
+  let frameCount = 0;
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let alive = false;
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+      if (p.opacity > 0) alive = true;
+    });
+    frameCount++;
+    if (alive && frameCount < 600) {
+      requestAnimationFrame(animate);
+    } else {
+      canvas.classList.remove('active');
+    }
+  }
+  animate();
+
+  // Second burst after a delay
+  setTimeout(() => {
+    for (let i = 0; i < 80; i++) {
+      const p = new Particle();
+      p.y = -Math.random() * 100;
+      p.vy = Math.random() * 5 + 3;
+      particles.push(p);
+    }
+  }, 1500);
+}
+</script>
+</body>
+</html>
