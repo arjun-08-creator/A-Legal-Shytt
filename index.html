@@ -17,7 +17,6 @@
             --mint: #A8E6CF;
             --mint-light: #D4F5E6;
             --baby-blue: #B8D4E3;
-            --baby-blue-light: #DAE9F2;
             --lavender: #C3AED6;
             --lavender-light: #E8DDF0;
             --pink-soft: #FFB7B2;
@@ -27,27 +26,69 @@
             --text-medium: #6B6B8D;
         }
 
-        html {
-            scroll-behavior: smooth;
-            scroll-snap-type: y mandatory;
-            overflow-y: scroll;
-            overflow-x: hidden;
+        html, body {
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
         }
 
         body {
             font-family: 'Quicksand', sans-serif;
             color: var(--text-dark);
             background: var(--cream);
-            overflow-x: hidden;
         }
 
-        /* Floating Elements */
+        /* ===== PAGE SYSTEM ===== */
+        .page-wrapper {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            overflow: hidden;
+        }
+
+        .page {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(60px) scale(0.97);
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1;
+        }
+
+        .page.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+            z-index: 10;
+        }
+
+        .page.exit-up {
+            opacity: 0;
+            transform: translateY(-80px) scale(0.95);
+            z-index: 5;
+        }
+
+        .page-content {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ===== FLOATING ELEMENTS ===== */
         .floating-elements {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             pointer-events: none;
             z-index: 0;
             overflow: hidden;
@@ -55,106 +96,107 @@
 
         .floater {
             position: absolute;
-            opacity: 0.3;
-            animation: floatAround 15s infinite ease-in-out;
-            font-size: 24px;
+            opacity: 0.2;
+            animation: floatAround 18s infinite ease-in-out;
+            font-size: 22px;
         }
 
-        .floater:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; animation-duration: 18s; }
-        .floater:nth-child(2) { top: 20%; left: 85%; animation-delay: 2s; animation-duration: 14s; }
-        .floater:nth-child(3) { top: 60%; left: 10%; animation-delay: 4s; animation-duration: 20s; }
-        .floater:nth-child(4) { top: 70%; left: 90%; animation-delay: 1s; animation-duration: 16s; }
-        .floater:nth-child(5) { top: 40%; left: 50%; animation-delay: 3s; animation-duration: 22s; }
-        .floater:nth-child(6) { top: 85%; left: 30%; animation-delay: 5s; animation-duration: 17s; }
-        .floater:nth-child(7) { top: 15%; left: 60%; animation-delay: 6s; animation-duration: 19s; }
-        .floater:nth-child(8) { top: 50%; left: 75%; animation-delay: 2.5s; animation-duration: 21s; }
-        .floater:nth-child(9) { top: 30%; left: 20%; animation-delay: 7s; animation-duration: 15s; }
-        .floater:nth-child(10) { top: 75%; left: 65%; animation-delay: 3.5s; animation-duration: 18s; }
+        .floater:nth-child(1) { top: 8%; left: 5%; animation-delay: 0s; animation-duration: 20s; }
+        .floater:nth-child(2) { top: 18%; left: 88%; animation-delay: 2s; animation-duration: 16s; }
+        .floater:nth-child(3) { top: 55%; left: 8%; animation-delay: 4s; animation-duration: 22s; }
+        .floater:nth-child(4) { top: 72%; left: 92%; animation-delay: 1s; animation-duration: 18s; }
+        .floater:nth-child(5) { top: 38%; left: 50%; animation-delay: 3s; animation-duration: 24s; }
+        .floater:nth-child(6) { top: 88%; left: 28%; animation-delay: 5s; animation-duration: 19s; }
+        .floater:nth-child(7) { top: 12%; left: 65%; animation-delay: 6s; animation-duration: 21s; }
+        .floater:nth-child(8) { top: 48%; left: 78%; animation-delay: 2.5s; animation-duration: 23s; }
 
         @keyframes floatAround {
             0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
-            25% { transform: translate(30px, -40px) rotate(90deg) scale(1.1); }
-            50% { transform: translate(-20px, -80px) rotate(180deg) scale(0.9); }
-            75% { transform: translate(40px, -30px) rotate(270deg) scale(1.05); }
+            25% { transform: translate(25px, -35px) rotate(90deg) scale(1.1); }
+            50% { transform: translate(-15px, -70px) rotate(180deg) scale(0.9); }
+            75% { transform: translate(35px, -25px) rotate(270deg) scale(1.05); }
         }
 
-        /* Paper Texture Overlay */
-        .paper-texture {
-            position: relative;
-        }
-
-        .paper-texture::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: 
-                radial-gradient(ellipse at 20% 50%, rgba(168, 230, 207, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 20%, rgba(195, 174, 214, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 80%, rgba(184, 212, 227, 0.08) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* Slides */
-        .slide {
-            min-height: 100vh;
+        /* ===== PAGE INDICATOR DOTS ===== */
+        .page-dots {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            align-items: center;
-            justify-content: center;
-            scroll-snap-align: start;
-            position: relative;
-            padding: 40px 20px;
+            gap: 10px;
+            z-index: 100;
         }
 
-        .slide-content {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-            width: 100%;
-            text-align: center;
+        .p-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--lavender);
+            opacity: 0.25;
+            transition: all 0.5s ease;
+            border: none;
+            cursor: default;
         }
 
-        /* ===== SLIDE 1 - WELCOME ===== */
-        .slide-welcome {
-            background: linear-gradient(160deg, #F0FFF4 0%, #E8F4FD 30%, #F3EEFA 60%, #FFF8F0 100%);
+        .p-dot.active {
+            opacity: 1;
+            background: #7C6BC4;
+            transform: scale(1.4);
+            box-shadow: 0 0 10px rgba(124, 107, 196, 0.4);
         }
 
-        .contract-header {
-            margin-bottom: 10px;
+        /* ===== GENERAL STYLES ===== */
+        .contract-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--mint), var(--baby-blue));
+            color: white;
+            padding: 8px 22px;
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 22px;
+            box-shadow: 0 4px 15px rgba(168, 230, 207, 0.4);
         }
 
+        .section-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--lavender), var(--baby-blue));
+            color: white;
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        /* ===== STAMP ICON ===== */
         .stamp-icon {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 20px;
+            width: 95px; height: 95px;
+            margin: 0 auto 18px;
             animation: stampBounce 3s infinite ease-in-out;
         }
 
         @keyframes stampBounce {
             0%, 100% { transform: rotate(-5deg) scale(1); }
-            50% { transform: rotate(5deg) scale(1.05); }
+            50% { transform: rotate(5deg) scale(1.06); }
         }
 
-        .contract-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--mint), var(--baby-blue));
-            color: white;
-            padding: 8px 24px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 15px rgba(168, 230, 207, 0.4);
+        /* ===== PAGE 1 - WELCOME ===== */
+        .page-welcome {
+            background: linear-gradient(160deg, #F0FFF4 0%, #E8F4FD 30%, #F3EEFA 60%, #FFF8F0 100%);
         }
 
         .welcome-title {
             font-family: 'Pacifico', cursive;
-            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-size: clamp(1.9rem, 5vw, 3rem);
             color: var(--text-dark);
-            line-height: 1.3;
-            margin-bottom: 15px;
+            line-height: 1.35;
+            margin-bottom: 12px;
             text-shadow: 2px 2px 0px rgba(168,230,207,0.3);
         }
 
@@ -165,18 +207,18 @@
 
         .welcome-subtitle {
             font-family: 'Patrick Hand', cursive;
-            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            font-size: clamp(1.05rem, 2.8vw, 1.4rem);
             color: var(--text-medium);
-            margin-bottom: 10px;
-            line-height: 1.6;
+            margin-bottom: 8px;
+            line-height: 1.5;
         }
 
         .for-prisha {
             font-family: 'Pacifico', cursive;
-            font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+            font-size: clamp(1.2rem, 3.2vw, 1.7rem);
             color: #E8839B;
-            margin: 20px 0 5px;
-            animation: sparkle 2s infinite;
+            margin: 18px 0 4px;
+            animation: sparkle 2.5s infinite;
         }
 
         @keyframes sparkle {
@@ -186,17 +228,17 @@
 
         .prisha-subtitle {
             font-family: 'Patrick Hand', cursive;
-            font-size: 1.05rem;
+            font-size: 1rem;
             color: var(--text-medium);
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             font-style: italic;
         }
 
         .welcome-doodles {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin: 25px 0;
+            gap: 28px;
+            margin: 22px 0;
             flex-wrap: wrap;
         }
 
@@ -204,29 +246,26 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
             animation: wobble 4s infinite ease-in-out;
         }
-
-        .doodle-item:nth-child(2) { animation-delay: 0.5s; }
-        .doodle-item:nth-child(3) { animation-delay: 1s; }
+        .doodle-item:nth-child(2) { animation-delay: 0.6s; }
+        .doodle-item:nth-child(3) { animation-delay: 1.2s; }
 
         @keyframes wobble {
             0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-5px) rotate(2deg); }
+            25% { transform: translateY(-6px) rotate(2deg); }
             75% { transform: translateY(3px) rotate(-2deg); }
         }
 
-        .doodle-emoji {
-            font-size: 2.5rem;
-        }
-
+        .doodle-emoji { font-size: 2.4rem; }
         .doodle-label {
             font-family: 'Patrick Hand', cursive;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             color: var(--text-medium);
         }
 
+        /* ===== PRIMARY CTA BUTTON ===== */
         .cta-button {
             display: inline-flex;
             align-items: center;
@@ -234,13 +273,13 @@
             background: linear-gradient(135deg, #7C6BC4, #9B8DD6);
             color: white;
             border: none;
-            padding: 16px 36px;
+            padding: 15px 34px;
             border-radius: 50px;
             font-family: 'Quicksand', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.35s ease;
             box-shadow: 0 6px 25px rgba(124, 107, 196, 0.35);
             position: relative;
             overflow: hidden;
@@ -249,17 +288,17 @@
         .cta-button::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 60%);
-            transform: scale(0);
-            transition: transform 0.5s;
+            top: 50%; left: 50%;
+            width: 0; height: 0;
+            background: rgba(255,255,255,0.15);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
         }
 
         .cta-button:hover::before {
-            transform: scale(1);
+            width: 300px;
+            height: 300px;
         }
 
         .cta-button:hover {
@@ -267,9 +306,7 @@
             box-shadow: 0 10px 35px rgba(124, 107, 196, 0.5);
         }
 
-        .cta-button:active {
-            transform: translateY(-1px);
-        }
+        .cta-button:active { transform: translateY(-1px); }
 
         .button-arrow {
             transition: transform 0.3s;
@@ -279,113 +316,91 @@
             transform: translateX(5px);
         }
 
-        /* Scroll Indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-            animation: scrollBounce 2s infinite;
-            opacity: 0.5;
-        }
-
-        @keyframes scrollBounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(8px); }
-        }
-
-        .scroll-indicator span {
-            font-size: 0.75rem;
+        .handwriting-note {
             font-family: 'Patrick Hand', cursive;
-            color: var(--text-medium);
-        }
-
-        /* Characters Container */
-        .characters-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 20px 0;
-        }
-
-        .character {
-            position: relative;
-            width: 80px;
-            height: 80px;
-        }
-
-        /* ===== SLIDE 2 - CLAUSES ===== */
-        .slide-clauses {
-            background: linear-gradient(160deg, #F3EEFA 0%, #E8F4FD 50%, #F0FFF4 100%);
-        }
-
-        .clauses-container {
-            width: 100%;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .section-badge {
+            background: linear-gradient(135deg, #FFFDE7, #FFF9C4);
+            padding: 10px 18px;
+            border-radius: 8px;
             display: inline-block;
-            background: linear-gradient(135deg, var(--lavender), var(--baby-blue));
-            color: white;
-            padding: 6px 20px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 15px;
+            transform: rotate(-1deg);
+            box-shadow: 2px 3px 10px rgba(0,0,0,0.05);
+            margin-top: 18px;
+            font-size: 0.92rem;
+            color: var(--text-medium);
+            border: 1px dashed #FFCC80;
+        }
+
+        .starburst { position: relative; display: inline-block; }
+        .starburst::before, .starburst::after {
+            content: '✨'; position: absolute; font-size: 0.75rem;
+            animation: twinkle 2s infinite;
+        }
+        .starburst::before { top: -10px; left: -14px; }
+        .starburst::after { top: -10px; right: -14px; animation-delay: 1s; }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .corner-doodle {
+            position: absolute;
+            opacity: 0.12;
+            font-size: 2.8rem;
+            pointer-events: none;
+        }
+        .corner-doodle.top-left { top: 18px; left: 18px; }
+        .corner-doodle.top-right { top: 18px; right: 18px; }
+        .corner-doodle.bottom-left { bottom: 18px; left: 18px; }
+        .corner-doodle.bottom-right { bottom: 18px; right: 18px; }
+
+        /* ===== PAGE 2 - CLAUSES ===== */
+        .page-clauses {
+            background: linear-gradient(160deg, #F3EEFA 0%, #E8F4FD 50%, #F0FFF4 100%);
         }
 
         .clauses-title {
             font-family: 'Pacifico', cursive;
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-size: clamp(1.7rem, 4vw, 2.4rem);
             color: var(--text-dark);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .clauses-subtitle {
             font-family: 'Patrick Hand', cursive;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: var(--text-medium);
-            margin-bottom: 35px;
+            margin-bottom: 28px;
         }
 
         .clause-card {
             background: white;
             border-radius: 20px;
-            padding: 24px 28px;
-            margin-bottom: 18px;
+            padding: 22px 24px;
+            margin-bottom: 16px;
             display: flex;
             align-items: flex-start;
-            gap: 18px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            gap: 16px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.05);
             border: 2px solid transparent;
             transition: all 0.4s ease;
             text-align: left;
             position: relative;
             overflow: hidden;
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateX(-40px);
         }
 
-        .clause-card.visible {
+        .clause-card.animate-in {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateX(0);
         }
 
         .clause-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 5px;
-            height: 100%;
+            top: 0; left: 0;
+            width: 5px; height: 100%;
             border-radius: 20px 0 0 20px;
         }
 
@@ -394,14 +409,14 @@
         .clause-card:nth-child(3)::before { background: linear-gradient(to bottom, var(--baby-blue), #7FB3D3); }
         .clause-card:nth-child(4)::before { background: linear-gradient(to bottom, var(--yellow-soft), #FFB347); }
 
-        .clause-card:nth-child(1) { transition-delay: 0.1s; }
-        .clause-card:nth-child(2) { transition-delay: 0.25s; }
-        .clause-card:nth-child(3) { transition-delay: 0.4s; }
-        .clause-card:nth-child(4) { transition-delay: 0.55s; }
+        .clause-card:nth-child(1) { transition-delay: 0.15s; }
+        .clause-card:nth-child(2) { transition-delay: 0.3s; }
+        .clause-card:nth-child(3) { transition-delay: 0.45s; }
+        .clause-card:nth-child(4) { transition-delay: 0.6s; }
 
         .clause-card:hover {
             transform: translateY(-3px) scale(1.01);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 28px rgba(0,0,0,0.1);
         }
 
         .clause-card:nth-child(1):hover { border-color: var(--mint); }
@@ -411,13 +426,12 @@
 
         .clause-icon {
             flex-shrink: 0;
-            width: 55px;
-            height: 55px;
-            border-radius: 15px;
+            width: 52px; height: 52px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
         }
 
         .clause-card:nth-child(1) .clause-icon { background: linear-gradient(135deg, #E8F8F0, #D0F0E0); }
@@ -427,34 +441,33 @@
 
         .clause-text h3 {
             font-family: 'Quicksand', sans-serif;
-            font-size: 1.05rem;
+            font-size: 1rem;
             font-weight: 700;
             color: var(--text-dark);
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
 
         .clause-text p {
             font-family: 'Patrick Hand', cursive;
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: var(--text-medium);
             line-height: 1.4;
         }
 
         .clause-number {
             position: absolute;
-            top: 10px;
-            right: 15px;
+            top: 8px; right: 14px;
             font-family: 'Pacifico', cursive;
-            font-size: 0.8rem;
-            opacity: 0.2;
+            font-size: 0.75rem;
+            opacity: 0.18;
             color: var(--text-dark);
         }
 
         .clauses-footer {
-            margin-top: 25px;
+            margin-top: 20px;
             font-family: 'Patrick Hand', cursive;
             color: var(--text-medium);
-            font-size: 1rem;
+            font-size: 0.95rem;
         }
 
         .next-btn {
@@ -464,38 +477,54 @@
             background: linear-gradient(135deg, #E8839B, #D4739B);
             color: white;
             border: none;
-            padding: 14px 32px;
+            padding: 14px 30px;
             border-radius: 50px;
             font-family: 'Quicksand', sans-serif;
             font-size: 1rem;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 25px rgba(232, 131, 155, 0.35);
-            margin-top: 20px;
+            transition: all 0.35s ease;
+            box-shadow: 0 6px 22px rgba(232, 131, 155, 0.35);
+            margin-top: 18px;
+            position: relative;
+            overflow: hidden;
         }
+
+        .next-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 0; height: 0;
+            background: rgba(255,255,255,0.15);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+        .next-btn:hover::before { width: 300px; height: 300px; }
 
         .next-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 35px rgba(232, 131, 155, 0.5);
+            box-shadow: 0 10px 32px rgba(232, 131, 155, 0.5);
         }
 
-        /* ===== SLIDE 3 - AGREEMENT ===== */
-        .slide-agreement {
+        .sticker {
+            position: absolute;
+            font-size: 1.8rem;
+            opacity: 0.12;
+            pointer-events: none;
+        }
+
+        /* ===== PAGE 3 - AGREEMENT ===== */
+        .page-agreement {
             background: linear-gradient(160deg, #FFF8F0 0%, #F3EEFA 50%, #E8F4FD 100%);
-        }
-
-        .agreement-container {
-            max-width: 550px;
-            margin: 0 auto;
         }
 
         .agreement-note {
             background: white;
             border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
-            margin-bottom: 35px;
+            padding: 28px 26px;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.06);
+            margin-bottom: 32px;
             position: relative;
             border: 2px dashed var(--lavender);
         }
@@ -503,24 +532,23 @@
         .agreement-note::before {
             content: '📌';
             position: absolute;
-            top: -15px;
-            left: 50%;
+            top: -14px; left: 50%;
             transform: translateX(-50%);
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             background: white;
             padding: 0 10px;
         }
 
         .agreement-title {
             font-family: 'Pacifico', cursive;
-            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            font-size: clamp(1.5rem, 3.8vw, 2.1rem);
             color: var(--text-dark);
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .agreement-text {
             font-family: 'Patrick Hand', cursive;
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: var(--text-medium);
             line-height: 1.6;
         }
@@ -535,18 +563,25 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 14px;
         }
 
         .fingerprint-label {
             font-family: 'Patrick Hand', cursive;
-            font-size: 1.1rem;
+            font-size: 1.08rem;
             color: var(--text-medium);
         }
 
+        .fp-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 220px; height: 220px;
+        }
+
         .fingerprint-btn {
-            width: 150px;
-            height: 150px;
+            width: 140px; height: 140px;
             border-radius: 50%;
             border: 4px solid var(--lavender);
             background: linear-gradient(135deg, #F3EEFA, #E8DDF0);
@@ -555,9 +590,10 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            transition: all 0.3s ease;
+            transition: all 0.35s ease;
             box-shadow: 0 0 30px rgba(195, 174, 214, 0.3);
             animation: pulseGlow 2s infinite;
+            z-index: 2;
         }
 
         @keyframes pulseGlow {
@@ -566,18 +602,15 @@
         }
 
         .fingerprint-btn:hover {
-            transform: scale(1.05);
+            transform: scale(1.06);
             border-color: #7C6BC4;
         }
 
-        .fingerprint-btn:active {
-            transform: scale(0.98);
-        }
+        .fingerprint-btn:active { transform: scale(0.98); }
 
         .fingerprint-svg {
-            width: 70px;
-            height: 70px;
-            opacity: 0.6;
+            width: 65px; height: 65px;
+            opacity: 0.55;
         }
 
         .fingerprint-btn.scanning {
@@ -592,8 +625,7 @@
 
         .scan-line {
             position: absolute;
-            width: 80%;
-            height: 3px;
+            width: 80%; height: 3px;
             background: linear-gradient(90deg, transparent, #7C6BC4, transparent);
             border-radius: 2px;
             top: 20%;
@@ -613,9 +645,8 @@
 
         .fingerprint-hint {
             font-family: 'Patrick Hand', cursive;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             color: var(--text-medium);
-            opacity: 0.7;
             animation: fadeInOut 3s infinite;
         }
 
@@ -624,7 +655,6 @@
             50% { opacity: 0.8; }
         }
 
-        /* Ring animations around fingerprint */
         .ring {
             position: absolute;
             border: 2px solid var(--lavender);
@@ -632,68 +662,78 @@
             opacity: 0;
         }
 
-        .ring-1 { width: 170px; height: 170px; animation: ringPulse 3s infinite 0s; }
-        .ring-2 { width: 200px; height: 200px; animation: ringPulse 3s infinite 1s; }
-        .ring-3 { width: 230px; height: 230px; animation: ringPulse 3s infinite 2s; }
+        .ring-1 { width: 160px; height: 160px; animation: ringPulse 3s infinite 0s; }
+        .ring-2 { width: 185px; height: 185px; animation: ringPulse 3s infinite 1s; }
+        .ring-3 { width: 210px; height: 210px; animation: ringPulse 3s infinite 2s; }
 
         @keyframes ringPulse {
             0% { transform: scale(0.8); opacity: 0.5; }
             100% { transform: scale(1.2); opacity: 0; }
         }
 
-        /* ===== SLIDE 4 - SUCCESS ===== */
-        .slide-success {
+        .ink-stamp {
+            display: inline-block;
+            border: 3px solid #7C6BC4;
+            border-radius: 10px;
+            padding: 7px 18px;
+            transform: rotate(-5deg);
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            color: #7C6BC4;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.78rem;
+            opacity: 0.65;
+            margin-top: 14px;
+        }
+
+        /* ===== PAGE 4 - SUCCESS ===== */
+        .page-success {
             background: linear-gradient(160deg, #F0FFF4 0%, #FFF8F0 30%, #F3EEFA 60%, #E8F4FD 100%);
-            display: none;
-        }
-
-        .slide-success.active {
-            display: flex;
-        }
-
-        .success-container {
-            max-width: 600px;
-            margin: 0 auto;
         }
 
         .success-checkmark {
-            width: 90px;
-            height: 90px;
+            width: 85px; height: 85px;
             background: linear-gradient(135deg, var(--mint), #7DCEA0);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 25px;
-            animation: checkBounce 0.6s ease-out;
-            box-shadow: 0 8px 30px rgba(168, 230, 207, 0.4);
+            margin: 0 auto 22px;
+            box-shadow: 0 8px 28px rgba(168, 230, 207, 0.4);
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        .success-checkmark.pop-in {
+            animation: checkBounce 0.7s ease-out forwards;
         }
 
         @keyframes checkBounce {
-            0% { transform: scale(0); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.25); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
         .checkmark-icon {
-            font-size: 2.5rem;
+            font-size: 2.3rem;
             color: white;
         }
 
         .success-title {
             font-family: 'Pacifico', cursive;
-            font-size: clamp(1.6rem, 4vw, 2.3rem);
+            font-size: clamp(1.5rem, 3.8vw, 2.2rem);
             color: var(--text-dark);
-            margin-bottom: 15px;
-            line-height: 1.3;
+            margin-bottom: 14px;
+            line-height: 1.35;
         }
 
         .success-message {
             font-family: 'Patrick Hand', cursive;
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             color: var(--text-medium);
             line-height: 1.6;
-            margin-bottom: 30px;
+            margin-bottom: 28px;
         }
 
         .success-message .no-exit {
@@ -704,22 +744,33 @@
             border-radius: 8px;
             font-family: 'Quicksand', sans-serif;
             font-weight: 700;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
+        }
+
+        .doodle-underline {
+            position: relative;
+            display: inline-block;
+        }
+        .doodle-underline::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0;
+            width: 100%; height: 8px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 10'%3E%3Cpath d='M0,5 Q25,0 50,5 T100,5 T150,5 T200,5' stroke='%23C3AED6' stroke-width='2' fill='none'/%3E%3C/svg%3E") repeat-x;
+            background-size: 100px 10px;
         }
 
         /* Certified Badge */
         .badge-container {
-            margin: 30px auto;
-            position: relative;
+            margin: 28px auto;
             display: inline-block;
         }
 
         .certified-badge {
-            width: 220px;
-            height: 220px;
+            width: 200px; height: 200px;
             position: relative;
             margin: 0 auto;
-            animation: badgeSpin 20s linear infinite;
+            animation: badgeSpin 22s linear infinite;
         }
 
         @keyframes badgeSpin {
@@ -729,24 +780,21 @@
 
         .badge-inner {
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 160px;
-            height: 160px;
+            width: 145px; height: 145px;
             background: linear-gradient(135deg, #7C6BC4, #9B8DD6);
             border-radius: 50%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 8px 30px rgba(124, 107, 196, 0.3);
-            animation: none;
+            box-shadow: 0 8px 28px rgba(124, 107, 196, 0.3);
             z-index: 2;
         }
 
         .badge-inner-content {
-            animation: badgeCounterSpin 20s linear infinite;
+            animation: badgeCounterSpin 22s linear infinite;
         }
 
         @keyframes badgeCounterSpin {
@@ -754,16 +802,13 @@
             to { transform: rotate(-360deg); }
         }
 
-        .badge-emoji {
-            font-size: 2rem;
-            margin-bottom: 5px;
-        }
+        .badge-emoji { font-size: 1.8rem; margin-bottom: 4px; }
 
         .badge-text {
             color: white;
             font-family: 'Quicksand', sans-serif;
             font-weight: 700;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             text-align: center;
@@ -773,34 +818,32 @@
         .badge-text .badge-city {
             display: block;
             font-family: 'Pacifico', cursive;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             text-transform: none;
             letter-spacing: 0;
-            margin-top: 4px;
+            margin-top: 3px;
             color: #FFD700;
         }
 
-        /* Badge decoration points */
         .badge-point {
             position: absolute;
-            width: 15px;
-            height: 15px;
+            width: 13px; height: 13px;
             border-radius: 50%;
         }
 
         .badge-point:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); background: var(--mint); }
-        .badge-point:nth-child(2) { top: 15%; right: 10%; background: var(--pink-soft); }
+        .badge-point:nth-child(2) { top: 14%; right: 9%; background: var(--pink-soft); }
         .badge-point:nth-child(3) { top: 50%; right: 0; transform: translateY(-50%); background: var(--baby-blue); }
-        .badge-point:nth-child(4) { bottom: 15%; right: 10%; background: var(--yellow-soft); }
+        .badge-point:nth-child(4) { bottom: 14%; right: 9%; background: var(--yellow-soft); }
         .badge-point:nth-child(5) { bottom: 0; left: 50%; transform: translateX(-50%); background: var(--lavender); }
-        .badge-point:nth-child(6) { bottom: 15%; left: 10%; background: var(--mint); }
+        .badge-point:nth-child(6) { bottom: 14%; left: 9%; background: var(--mint); }
         .badge-point:nth-child(7) { top: 50%; left: 0; transform: translateY(-50%); background: var(--pink-soft); }
-        .badge-point:nth-child(8) { top: 15%; left: 10%; background: var(--baby-blue); }
+        .badge-point:nth-child(8) { top: 14%; left: 9%; background: var(--baby-blue); }
 
         .success-footer {
-            margin-top: 25px;
+            margin-top: 22px;
             font-family: 'Patrick Hand', cursive;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: var(--text-medium);
         }
 
@@ -818,177 +861,22 @@
 
         .success-date {
             font-family: 'Quicksand', sans-serif;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             color: var(--text-medium);
-            opacity: 0.6;
-            margin-top: 15px;
+            opacity: 0.55;
+            margin-top: 12px;
         }
 
-        /* Confetti Canvas */
+        /* ===== CONFETTI ===== */
         #confetti-canvas {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             pointer-events: none;
-            z-index: 100;
+            z-index: 200;
         }
 
-        /* Nav Dots */
-        .nav-dots {
-            position: fixed;
-            right: 25px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            z-index: 50;
-        }
-
-        .nav-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--lavender);
-            opacity: 0.3;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
-        }
-
-        .nav-dot.active {
-            opacity: 1;
-            transform: scale(1.3);
-            background: #7C6BC4;
-        }
-
-        .nav-dot:hover {
-            opacity: 0.7;
-            transform: scale(1.2);
-        }
-
-        /* Cute Characters - SVG based */
-        .cute-char {
-            display: inline-block;
-            animation: charFloat 4s infinite ease-in-out;
-        }
-
-        .cute-char:nth-child(even) { animation-delay: 1s; }
-
-        @keyframes charFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        /* Decorative corner doodles */
-        .corner-doodle {
-            position: absolute;
-            opacity: 0.15;
-            font-size: 3rem;
-        }
-
-        .corner-doodle.top-left { top: 20px; left: 20px; }
-        .corner-doodle.top-right { top: 20px; right: 20px; }
-        .corner-doodle.bottom-left { bottom: 20px; left: 20px; }
-        .corner-doodle.bottom-right { bottom: 20px; right: 20px; }
-
-        /* SVG Doodle Lines */
-        .doodle-underline {
-            position: relative;
-            display: inline-block;
-        }
-
-        .doodle-underline::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 8px;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 10'%3E%3Cpath d='M0,5 Q25,0 50,5 T100,5 T150,5 T200,5' stroke='%23C3AED6' stroke-width='2' fill='none'/%3E%3C/svg%3E") repeat-x;
-            background-size: 100px 10px;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-dots {
-                right: 10px;
-            }
-
-            .nav-dot {
-                width: 8px;
-                height: 8px;
-            }
-
-            .clause-card {
-                padding: 18px 20px;
-            }
-
-            .clause-icon {
-                width: 45px;
-                height: 45px;
-                font-size: 1.3rem;
-            }
-
-            .fingerprint-btn {
-                width: 130px;
-                height: 130px;
-            }
-
-            .certified-badge {
-                width: 180px;
-                height: 180px;
-            }
-
-            .badge-inner {
-                width: 130px;
-                height: 130px;
-            }
-
-            .agreement-note {
-                padding: 25px 20px;
-            }
-
-            .welcome-doodles {
-                gap: 20px;
-            }
-
-            .slide {
-                padding: 30px 15px;
-            }
-
-            .badge-text {
-                font-size: 0.6rem;
-            }
-
-            .badge-text .badge-city {
-                font-size: 0.8rem;
-            }
-
-            .ring-1 { width: 150px; height: 150px; }
-            .ring-2 { width: 175px; height: 175px; }
-            .ring-3 { width: 200px; height: 200px; }
-        }
-
-        @media (max-width: 400px) {
-            .welcome-doodles {
-                gap: 15px;
-            }
-
-            .doodle-emoji {
-                font-size: 2rem;
-            }
-
-            .clause-card {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-        }
-
-        /* Loading Transition */
+        /* ===== LOADER ===== */
         .page-loader {
             position: fixed;
             top: 0; left: 0;
@@ -998,16 +886,12 @@
             align-items: center;
             justify-content: center;
             z-index: 9999;
-            transition: opacity 0.5s, visibility 0.5s;
+            transition: opacity 0.6s, visibility 0.6s;
         }
 
         .page-loader.hidden {
             opacity: 0;
             visibility: hidden;
-        }
-
-        .loader-content {
-            text-align: center;
         }
 
         .loader-emoji {
@@ -1017,101 +901,76 @@
 
         @keyframes loaderBounce {
             0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-20px) scale(1.1); }
+            50% { transform: translateY(-18px) scale(1.1); }
         }
 
         .loader-text {
             font-family: 'Patrick Hand', cursive;
             color: var(--text-medium);
-            margin-top: 15px;
+            margin-top: 14px;
             font-size: 1.1rem;
         }
 
-        /* Cute sticker decorations */
-        .sticker {
-            position: absolute;
-            font-size: 2rem;
-            opacity: 0.15;
-            pointer-events: none;
+        /* ===== SUCCESS ELEMENTS STAGGER ===== */
+        .success-el {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: all 0.6s ease;
         }
 
-        /* Handwriting style note */
-        .handwriting-note {
-            font-family: 'Patrick Hand', cursive;
-            background: linear-gradient(135deg, #FFFDE7, #FFF9C4);
-            padding: 12px 20px;
-            border-radius: 8px;
-            display: inline-block;
-            transform: rotate(-1deg);
-            box-shadow: 2px 3px 10px rgba(0,0,0,0.06);
-            margin-top: 20px;
-            font-size: 0.95rem;
-            color: var(--text-medium);
-            border: 1px dashed #FFCC80;
+        .success-el.show {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        /* Cute star burst */
-        .starburst {
-            position: relative;
-            display: inline-block;
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .clause-card { padding: 16px 18px; }
+            .clause-icon { width: 44px; height: 44px; font-size: 1.2rem; }
+            .fingerprint-btn { width: 120px; height: 120px; }
+            .fingerprint-svg { width: 55px; height: 55px; }
+            .certified-badge { width: 170px; height: 170px; }
+            .badge-inner { width: 120px; height: 120px; }
+            .badge-text { font-size: 0.58rem; }
+            .badge-text .badge-city { font-size: 0.78rem; }
+            .agreement-note { padding: 22px 18px; }
+            .ring-1 { width: 140px; height: 140px; }
+            .ring-2 { width: 162px; height: 162px; }
+            .ring-3 { width: 185px; height: 185px; }
+            .fp-wrapper { width: 190px; height: 190px; }
+            .page { padding: 25px 14px; }
         }
 
-        .starburst::before,
-        .starburst::after {
-            content: '✨';
-            position: absolute;
-            font-size: 0.8rem;
-            animation: twinkle 2s infinite;
+        @media (max-width: 420px) {
+            .welcome-doodles { gap: 15px; }
+            .doodle-emoji { font-size: 1.9rem; }
+            .clause-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .cta-button, .next-btn { padding: 13px 24px; font-size: 0.95rem; }
         }
 
-        .starburst::before { top: -10px; left: -15px; }
-        .starburst::after { top: -10px; right: -15px; animation-delay: 1s; }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(0.8); }
-            50% { opacity: 1; transform: scale(1.2); }
-        }
-
-        /* Tape effect on cards */
-        .tape {
-            position: absolute;
-            width: 80px;
-            height: 25px;
-            background: rgba(168, 230, 207, 0.4);
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%) rotate(-2deg);
-            border-radius: 3px;
-        }
-
-        /* Ink stamp effect */
-        .ink-stamp {
-            display: inline-block;
-            border: 3px solid #7C6BC4;
-            border-radius: 10px;
-            padding: 8px 20px;
-            transform: rotate(-5deg);
-            font-family: 'Quicksand', sans-serif;
-            font-weight: 700;
-            color: #7C6BC4;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.8rem;
-            opacity: 0.7;
-            margin-top: 15px;
+        @media (max-height: 700px) {
+            .stamp-icon { width: 70px; height: 70px; margin-bottom: 10px; }
+            .welcome-doodles { margin: 14px 0; }
+            .handwriting-note { margin-top: 12px; }
+            .clause-card { padding: 14px 16px; margin-bottom: 10px; }
         }
     </style>
 </head>
 <body>
-    <!-- Page Loader -->
+
+    <!-- Loader -->
     <div class="page-loader" id="pageLoader">
-        <div class="loader-content">
+        <div style="text-align:center;">
             <div class="loader-emoji">📜</div>
             <div class="loader-text">Preparing the Contract...</div>
         </div>
     </div>
 
-    <!-- Floating Background Elements -->
+    <!-- Floating Background -->
     <div class="floating-elements">
         <div class="floater">⭐</div>
         <div class="floater">🌸</div>
@@ -1121,31 +980,30 @@
         <div class="floater">🦋</div>
         <div class="floater">🌟</div>
         <div class="floater">🍀</div>
-        <div class="floater">💜</div>
-        <div class="floater">🌈</div>
     </div>
 
-    <!-- Nav Dots -->
-    <div class="nav-dots" id="navDots">
-        <button class="nav-dot active" data-slide="0" title="Welcome"></button>
-        <button class="nav-dot" data-slide="1" title="Clauses"></button>
-        <button class="nav-dot" data-slide="2" title="Agreement"></button>
-        <button class="nav-dot" data-slide="3" title="Success"></button>
+    <!-- Page Dots -->
+    <div class="page-dots" id="pageDots">
+        <div class="p-dot active" id="dot0"></div>
+        <div class="p-dot" id="dot1"></div>
+        <div class="p-dot" id="dot2"></div>
+        <div class="p-dot" id="dot3"></div>
     </div>
 
-    <!-- Confetti Canvas -->
+    <!-- Confetti -->
     <canvas id="confetti-canvas"></canvas>
 
-    <!-- ===== SLIDE 1: WELCOME ===== -->
-    <section class="slide slide-welcome paper-texture" id="slide-0">
-        <div class="corner-doodle top-left">🌸</div>
-        <div class="corner-doodle top-right">⭐</div>
-        <div class="corner-doodle bottom-left">🌿</div>
-        <div class="corner-doodle bottom-right">🦋</div>
+    <!-- Page Wrapper -->
+    <div class="page-wrapper">
 
-        <div class="slide-content">
-            <div class="contract-header">
-                <!-- Cute Contract/Stamp SVG Icon -->
+        <!-- ===== PAGE 1: WELCOME ===== -->
+        <div class="page page-welcome active" id="page0">
+            <div class="corner-doodle top-left">🌸</div>
+            <div class="corner-doodle top-right">⭐</div>
+            <div class="corner-doodle bottom-left">🌿</div>
+            <div class="corner-doodle bottom-right">🦋</div>
+
+            <div class="page-content">
                 <div class="stamp-icon">
                     <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="50" cy="50" r="45" fill="none" stroke="#7C6BC4" stroke-width="3" stroke-dasharray="8,4" opacity="0.5"/>
@@ -1160,286 +1018,288 @@
                 </div>
 
                 <div class="contract-badge">📋 Contract No. #BFF-2025</div>
-            </div>
 
-            <h1 class="welcome-title">
-                Welcome to our<br>
-                <span class="highlight starburst">Strong Bond</span><br>
-                Contract Services!
-            </h1>
+                <h1 class="welcome-title">
+                    Welcome to our<br>
+                    <span class="highlight starburst">Strong Bond</span><br>
+                    Contract Services!
+                </h1>
 
-            <p class="welcome-subtitle">
-                Where friendship is official and fun is guaranteed ✨
-            </p>
+                <p class="welcome-subtitle">
+                    Where friendship is official and fun is guaranteed ✨
+                </p>
 
-            <div class="for-prisha">
-                📝 Prepared exclusively for: Prisha
-            </div>
-            <p class="prisha-subtitle">
-                (The one who makes everything more fun just by being there 😊)
-            </p>
-
-            <div class="welcome-doodles">
-                <div class="doodle-item cute-char">
-                    <span class="doodle-emoji">🤝</span>
-                    <span class="doodle-label">Strong Bond</span>
+                <div class="for-prisha">
+                    📝 Prepared exclusively for: Prisha
                 </div>
-                <div class="doodle-item cute-char">
-                    <span class="doodle-emoji">📜</span>
-                    <span class="doodle-label">Official Docs</span>
-                </div>
-                <div class="doodle-item cute-char">
-                    <span class="doodle-emoji">✨</span>
-                    <span class="doodle-label">Forever Valid</span>
-                </div>
-            </div>
+                <p class="prisha-subtitle">
+                    (The one who makes everything more fun just by being there 😊)
+                </p>
 
-            <button class="cta-button" onclick="scrollToSlide(1)">
-                Let's Read the Contract First
-                <span class="button-arrow">📄➡️</span>
-            </button>
+                <div class="welcome-doodles">
+                    <div class="doodle-item">
+                        <span class="doodle-emoji">🤝</span>
+                        <span class="doodle-label">Strong Bond</span>
+                    </div>
+                    <div class="doodle-item">
+                        <span class="doodle-emoji">📜</span>
+                        <span class="doodle-label">Official Docs</span>
+                    </div>
+                    <div class="doodle-item">
+                        <span class="doodle-emoji">✨</span>
+                        <span class="doodle-label">Forever Valid</span>
+                    </div>
+                </div>
 
-            <div class="handwriting-note">
-                ✏️ P.S. — No lawyers needed, just good vibes!
+                <button class="cta-button" onclick="goToPage(1)">
+                    Let's Read the Contract First
+                    <span class="button-arrow">📄➡️</span>
+                </button>
+
+                <div class="handwriting-note">
+                    ✏️ P.S. — No lawyers needed, just good vibes!
+                </div>
             </div>
         </div>
 
-        <div class="scroll-indicator">
-            <span>Scroll Down</span>
-            <span>👇</span>
-        </div>
-    </section>
+        <!-- ===== PAGE 2: CLAUSES ===== -->
+        <div class="page page-clauses" id="page1">
+            <div class="sticker" style="top:25px; left:25px; transform:rotate(-15deg);">📎</div>
+            <div class="sticker" style="top:35px; right:35px; transform:rotate(10deg);">🖊️</div>
+            <div class="sticker" style="bottom:50px; left:40px; transform:rotate(5deg);">📌</div>
+            <div class="sticker" style="bottom:35px; right:25px; transform:rotate(-8deg);">🗂️</div>
 
-    <!-- ===== SLIDE 2: CLAUSES ===== -->
-    <section class="slide slide-clauses paper-texture" id="slide-1">
-        <div class="sticker" style="top: 30px; left: 30px; transform: rotate(-15deg);">📎</div>
-        <div class="sticker" style="top: 40px; right: 40px; transform: rotate(10deg);">🖊️</div>
-        <div class="sticker" style="bottom: 40px; left: 50px; transform: rotate(5deg);">📌</div>
-        <div class="sticker" style="bottom: 30px; right: 30px; transform: rotate(-8deg);">🗂️</div>
-
-        <div class="slide-content">
-            <div class="clauses-container">
+            <div class="page-content">
                 <div class="section-badge">📋 Section 2</div>
                 <h2 class="clauses-title">Official Friendship Clauses</h2>
                 <p class="clauses-subtitle">What makes our bond legally unbreakable ✨</p>
 
-                <div class="clause-card" id="clause1">
+                <div class="clause-card" id="c1">
                     <span class="clause-number">§1</span>
                     <div class="clause-icon">😁</div>
                     <div class="clause-text">
                         <h3>The Braces Rule 🦷✨</h3>
-                        <p>That signature braces-filled smile that brightens up the entire day. Seriously, it's like a little burst of sunshine every single time — keep smiling like that always!</p>
+                        <p>That signature braces-filled smile that brightens up the entire day. Seriously, it's like a little burst of sunshine every single time!</p>
                     </div>
                 </div>
 
-                <div class="clause-card" id="clause2">
+                <div class="clause-card" id="c2">
                     <span class="clause-number">§2</span>
                     <div class="clause-icon">🧸</div>
                     <div class="clause-text">
                         <h3>The Inner Child Policy 👶🎈</h3>
-                        <p>For the constant childish behavior that keeps things lively and entertaining. Growing up is overrated anyway — this clause protects your right to be a kid forever!</p>
+                        <p>For the constant childish behavior that keeps things lively. Growing up is overrated anyway — stay a kid forever!</p>
                     </div>
                 </div>
 
-                <div class="clause-card" id="clause3">
+                <div class="clause-card" id="c3">
                     <span class="clause-number">§3</span>
                     <div class="clause-icon">💬</div>
                     <div class="clause-text">
                         <h3>The Openness Clause 🔓💕</h3>
-                        <p>For being real, raw, and open about everything. No walls, no filters — just pure, honest friendship. That's the rarest and most beautiful thing ever!</p>
+                        <p>For being real, raw, and open about everything. No walls, no filters — just pure honest friendship!</p>
                     </div>
                 </div>
 
-                <div class="clause-card" id="clause4">
+                <div class="clause-card" id="c4">
                     <span class="clause-number">§4</span>
                     <div class="clause-icon">⚡</div>
                     <div class="clause-text">
                         <h3>The High Energy Mandate 🔥🎉</h3>
-                        <p>For that always excited and 'mast' mood that makes everything 10x more fun. Your energy is absolutely contagious and this clause makes sure it never runs out!</p>
+                        <p>For that always excited and 'mast' mood that makes everything 10x more fun. Your energy is absolutely contagious!</p>
                     </div>
                 </div>
 
-                <p class="clauses-footer">
-                    All clauses are non-negotiable and eternally binding 😤💜
-                </p>
+                <p class="clauses-footer">All clauses are non-negotiable and eternally binding 😤💜</p>
 
-                <button class="next-btn" onclick="scrollToSlide(2)">
+                <button class="next-btn" onclick="goToPage(2)">
                     I Accept All Clauses ✅
                     <span class="button-arrow">→</span>
                 </button>
             </div>
         </div>
-    </section>
 
-    <!-- ===== SLIDE 3: AGREEMENT ===== -->
-    <section class="slide slide-agreement paper-texture" id="slide-2">
-        <div class="corner-doodle top-left" style="opacity: 0.1;">🔏</div>
-        <div class="corner-doodle top-right" style="opacity: 0.1;">📝</div>
+        <!-- ===== PAGE 3: AGREEMENT ===== -->
+        <div class="page page-agreement" id="page2">
+            <div class="corner-doodle top-left" style="opacity:0.08;">🔏</div>
+            <div class="corner-doodle top-right" style="opacity:0.08;">📝</div>
 
-        <div class="slide-content">
-            <div class="agreement-container">
-                <div class="section-badge" style="background: linear-gradient(135deg, #E8839B, #D4739B);">⚠️ Final Step</div>
+            <div class="page-content">
+                <div style="max-width:550px; margin:0 auto;">
+                    <div class="section-badge" style="background:linear-gradient(135deg,#E8839B,#D4739B);">⚠️ Final Step</div>
 
-                <h2 class="agreement-title">The Official Agreement</h2>
+                    <h2 class="agreement-title">The Official Agreement</h2>
 
-                <div class="agreement-note">
-                    <p class="agreement-text">
-                        <strong class="bold-text">⚠️ Wait! Before you sign:</strong><br><br>
-                        Only place your finger here if you <strong class="bold-text">truly agree</strong> to keep this bond strong <strong class="bold-text">forever</strong>.<br><br>
-                        This means through thick and thin, through good days and bad days, through boring lectures and midnight conversations 🌙<br><br>
-                        <em>— No take-backs. No loopholes. No expiry date.</em>
-                    </p>
-                </div>
-
-                <div class="fingerprint-section">
-                    <p class="fingerprint-label">👇 Place your finger below to seal the deal</p>
-
-                    <div style="position: relative; display: flex; align-items: center; justify-content: center;">
-                        <div class="ring ring-1"></div>
-                        <div class="ring ring-2"></div>
-                        <div class="ring ring-3"></div>
-
-                        <button class="fingerprint-btn" id="fingerprintBtn" onclick="startScan()">
-                            <div class="scan-line"></div>
-                            <svg class="fingerprint-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 1C8.1 1 5 4.1 5 8v6c0 1.1.9 2 2 2h2v-6c0-1.7 1.3-3 3-3s3 1.3 3 3v6h2c1.1 0 2-.9 2-2V8c0-3.9-3.1-7-7-7z" stroke="#7C6BC4" stroke-width="1.5" stroke-linecap="round"/>
-                                <path d="M12 4C9.8 4 8 5.8 8 8v5" stroke="#7C6BC4" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
-                                <path d="M16 8c0-2.2-1.8-4-4-4" stroke="#7C6BC4" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
-                                <path d="M12 8v8" stroke="#7C6BC4" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
-                                <path d="M10 7c0 1.1.9 2 2 2s2-.9 2-2" stroke="#7C6BC4" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
-                                <path d="M9 12c0 1.7 1.3 3 3 3s3-1.3 3-3" stroke="#7C6BC4" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/>
-                                <circle cx="12" cy="20" r="2" fill="#7C6BC4" opacity="0.3"/>
-                            </svg>
-                        </button>
+                    <div class="agreement-note">
+                        <p class="agreement-text">
+                            <strong class="bold-text">⚠️ Wait! Before you sign:</strong><br><br>
+                            Only place your finger here if you <strong class="bold-text">truly agree</strong> to keep this bond strong <strong class="bold-text">forever</strong>.<br><br>
+                            This means through thick and thin, through good days and bad days, through boring lectures and midnight conversations 🌙<br><br>
+                            <em>— No take-backs. No loopholes. No expiry date.</em>
+                        </p>
                     </div>
 
-                    <p class="fingerprint-hint">👆 Tap to scan your fingerprint</p>
-                </div>
+                    <div class="fingerprint-section">
+                        <p class="fingerprint-label">👇 Place your finger below to seal the deal</p>
 
-                <div class="ink-stamp">Awaiting Verification</div>
+                        <div class="fp-wrapper">
+                            <div class="ring ring-1"></div>
+                            <div class="ring ring-2"></div>
+                            <div class="ring ring-3"></div>
+
+                            <button class="fingerprint-btn" id="fingerprintBtn" onclick="startScan()">
+                                <div class="scan-line"></div>
+                                <svg class="fingerprint-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 1C8.1 1 5 4.1 5 8v6c0 1.1.9 2 2 2h2v-6c0-1.7 1.3-3 3-3s3 1.3 3 3v6h2c1.1 0 2-.9 2-2V8c0-3.9-3.1-7-7-7z" stroke="#7C6BC4" stroke-width="1.5" stroke-linecap="round"/>
+                                    <path d="M12 4C9.8 4 8 5.8 8 8v5" stroke="#7C6BC4" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+                                    <path d="M16 8c0-2.2-1.8-4-4-4" stroke="#7C6BC4" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+                                    <path d="M12 8v8" stroke="#7C6BC4" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+                                    <path d="M10 7c0 1.1.9 2 2 2s2-.9 2-2" stroke="#7C6BC4" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+                                    <path d="M9 12c0 1.7 1.3 3 3 3s3-1.3 3-3" stroke="#7C6BC4" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/>
+                                    <circle cx="12" cy="20" r="2" fill="#7C6BC4" opacity="0.3"/>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <p class="fingerprint-hint">👆 Tap to scan your fingerprint</p>
+                    </div>
+
+                    <div class="ink-stamp">Awaiting Verification</div>
+                </div>
             </div>
         </div>
-    </section>
 
-    <!-- ===== SLIDE 4: SUCCESS ===== -->
-    <section class="slide slide-success paper-texture" id="slide-3">
-        <div class="slide-content">
-            <div class="success-container">
-                <div class="success-checkmark">
-                    <span class="checkmark-icon">✓</span>
-                </div>
+        <!-- ===== PAGE 4: SUCCESS ===== -->
+        <div class="page page-success" id="page3">
+            <div class="page-content">
+                <div style="max-width:600px; margin:0 auto;">
 
-                <div class="section-badge" style="background: linear-gradient(135deg, var(--mint), #7DCEA0);">🎉 Verified & Sealed</div>
+                    <div class="success-checkmark" id="successCheck">
+                        <span class="checkmark-icon">✓</span>
+                    </div>
 
-                <h2 class="success-title">
-                    Congratulations! 🎊<br>
-                    Our bond is now successfully<br>
-                    and legally <span class="doodle-underline">STRONG</span>!
-                </h2>
+                    <div class="success-el" id="se1">
+                        <div class="section-badge" style="background:linear-gradient(135deg,var(--mint),#7DCEA0);">🎉 Verified & Sealed</div>
+                    </div>
 
-                <p class="success-message">
-                    The contract has been sealed with your official fingerprint. 🤝✨<br><br>
-                    <span class="no-exit">🚫 No exits allowed!</span><br><br>
-                    You're now officially stuck with me through every adventure, every laugh, every weird conversation, and every inside joke yet to be created. Deal with it! 😎💜
-                </p>
+                    <div class="success-el" id="se2">
+                        <h2 class="success-title">
+                            Congratulations! 🎊<br>
+                            Our bond is now successfully<br>
+                            and legally <span class="doodle-underline">STRONG</span>!
+                        </h2>
+                    </div>
 
-                <!-- Certified Badge -->
-                <div class="badge-container">
-                    <div class="certified-badge">
-                        <div class="badge-point"></div>
-                        <div class="badge-point"></div>
-                        <div class="badge-point"></div>
-                        <div class="badge-point"></div>
-                        <div class="badge-point"></div>
-                        <div class="badge-point"></div>
-                        <div class="badge-point"></div>
-                        <div class="badge-point"></div>
+                    <div class="success-el" id="se3">
+                        <p class="success-message">
+                            The contract has been sealed with your official fingerprint. 🤝✨<br><br>
+                            <span class="no-exit">🚫 No exits allowed!</span><br><br>
+                            You're now officially stuck with me through every adventure, every laugh, every weird conversation, and every inside joke yet to be created. Deal with it! 😎💜
+                        </p>
+                    </div>
 
-                        <div class="badge-inner">
-                            <div class="badge-inner-content">
-                                <div class="badge-emoji">🏆</div>
-                                <div class="badge-text">
-                                    Certified
-                                    <span class="badge-city">Meerut-Rewa</span>
-                                    Besties
+                    <div class="success-el" id="se4">
+                        <div class="badge-container" id="badgeClick">
+                            <div class="certified-badge">
+                                <div class="badge-point"></div>
+                                <div class="badge-point"></div>
+                                <div class="badge-point"></div>
+                                <div class="badge-point"></div>
+                                <div class="badge-point"></div>
+                                <div class="badge-point"></div>
+                                <div class="badge-point"></div>
+                                <div class="badge-point"></div>
+
+                                <div class="badge-inner">
+                                    <div class="badge-inner-content">
+                                        <div class="badge-emoji">🏆</div>
+                                        <div class="badge-text">
+                                            Certified
+                                            <span class="badge-city">Meerut-Rewa</span>
+                                            Besties
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="success-footer">
-                    Made with <span class="heart-beat">💜</span> and a whole lot of friendship<br>
-                    <small>Valid from today until forever ♾️</small>
+                    <div class="success-el" id="se5">
+                        <div class="success-footer">
+                            Made with <span class="heart-beat">💜</span> and a whole lot of friendship<br>
+                            <small>Valid from today until forever ♾️</small>
+                        </div>
+                        <div class="success-date" id="contractDate"></div>
+                    </div>
                 </div>
-
-                <div class="success-date" id="contractDate"></div>
             </div>
         </div>
-    </section>
+
+    </div>
 
     <script>
-        // ===== PAGE LOADER =====
+        // ===== LOADER =====
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.getElementById('pageLoader').classList.add('hidden');
-            }, 1500);
+            }, 1400);
         });
 
-        // ===== SMOOTH SCROLL TO SLIDE =====
-        function scrollToSlide(index) {
-            const slide = document.getElementById(`slide-${index}`);
-            if (slide) {
-                slide.scrollIntoView({ behavior: 'smooth' });
-            }
+        // ===== PAGE NAVIGATION =====
+        let currentPage = 0;
+        let isTransitioning = false;
+
+        function goToPage(targetIndex) {
+            if (isTransitioning || targetIndex === currentPage) return;
+            isTransitioning = true;
+
+            const currentEl = document.getElementById(`page${currentPage}`);
+            const targetEl = document.getElementById(`page${targetIndex}`);
+
+            // Exit current page
+            currentEl.classList.remove('active');
+            currentEl.classList.add('exit-up');
+
+            // After exit animation starts, bring in the new page
+            setTimeout(() => {
+                currentEl.classList.remove('exit-up');
+                targetEl.classList.add('active');
+
+                // Update dots
+                document.querySelectorAll('.p-dot').forEach((d, i) => {
+                    d.classList.toggle('active', i === targetIndex);
+                });
+
+                currentPage = targetIndex;
+
+                // Trigger page-specific animations
+                if (targetIndex === 1) {
+                    triggerClauseAnimations();
+                }
+                if (targetIndex === 3) {
+                    triggerSuccessAnimations();
+                }
+
+                setTimeout(() => {
+                    isTransitioning = false;
+                }, 400);
+            }, 350);
         }
 
-        // ===== NAV DOTS =====
-        const slides = document.querySelectorAll('.slide');
-        const dots = document.querySelectorAll('.nav-dot');
+        // ===== CLAUSE CARD ANIMATIONS =====
+        function triggerClauseAnimations() {
+            const cards = document.querySelectorAll('.clause-card');
+            cards.forEach(c => c.classList.remove('animate-in'));
 
-        // Intersection Observer for active dot & card animations
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.5
-        };
-
-        const slideObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const slideIndex = Array.from(slides).indexOf(entry.target);
-                    dots.forEach((dot, i) => {
-                        dot.classList.toggle('active', i === slideIndex);
-                    });
-
-                    // Trigger clause card animations
-                    if (slideIndex === 1) {
-                        setTimeout(() => {
-                            document.querySelectorAll('.clause-card').forEach(card => {
-                                card.classList.add('visible');
-                            });
-                        }, 200);
-                    }
-                }
-            });
-        }, observerOptions);
-
-        slides.forEach(slide => slideObserver.observe(slide));
-
-        // Nav dot click
-        dots.forEach(dot => {
-            dot.addEventListener('click', () => {
-                const slideIndex = parseInt(dot.dataset.slide);
-                if (slideIndex === 3) {
-                    const successSlide = document.getElementById('slide-3');
-                    if (successSlide.style.display === 'none' || !successSlide.classList.contains('active')) {
-                        return; // Don't scroll to success if not unlocked
-                    }
-                }
-                scrollToSlide(slideIndex);
-            });
-        });
+            // Stagger them in
+            setTimeout(() => {
+                cards.forEach((card, i) => {
+                    setTimeout(() => {
+                        card.classList.add('animate-in');
+                    }, i * 180);
+                });
+            }, 200);
+        }
 
         // ===== FINGERPRINT SCAN =====
         let isScanning = false;
@@ -1451,33 +1311,43 @@
             const btn = document.getElementById('fingerprintBtn');
             btn.classList.add('scanning');
 
-            // Scanning animation duration
             setTimeout(() => {
                 btn.classList.remove('scanning');
-                showSuccess();
+                goToPage(3);
+                isScanning = false;
             }, 1800);
         }
 
-        function showSuccess() {
-            const successSlide = document.getElementById('slide-3');
-            successSlide.classList.add('active');
-            successSlide.style.display = 'flex';
+        // ===== SUCCESS PAGE ANIMATIONS =====
+        function triggerSuccessAnimations() {
+            const check = document.getElementById('successCheck');
+            check.classList.remove('pop-in');
 
-            // Set the date
+            // Set date
             const now = new Date();
             const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-            document.getElementById('contractDate').textContent = 
+            document.getElementById('contractDate').textContent =
                 `📅 Contract sealed on: ${now.toLocaleDateString('en-IN', options)}`;
 
-            // Scroll to success
+            // Stagger success elements
             setTimeout(() => {
-                scrollToSlide(3);
-                // Start confetti
-                setTimeout(startConfetti, 500);
+                check.classList.add('pop-in');
             }, 300);
+
+            const successEls = ['se1', 'se2', 'se3', 'se4', 'se5'];
+            successEls.forEach((id, i) => {
+                const el = document.getElementById(id);
+                el.classList.remove('show');
+                setTimeout(() => {
+                    el.classList.add('show');
+                }, 600 + i * 250);
+            });
+
+            // Confetti
+            setTimeout(startConfetti, 800);
         }
 
-        // ===== CONFETTI SYSTEM =====
+        // ===== CONFETTI =====
         const canvas = document.getElementById('confetti-canvas');
         const ctx = canvas.getContext('2d');
         let confettiPieces = [];
@@ -1487,14 +1357,11 @@
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         }
-
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        class ConfettiPiece {
-            constructor() {
-                this.reset();
-            }
+        class Confetti {
+            constructor() { this.reset(); }
 
             reset() {
                 this.x = Math.random() * canvas.width;
@@ -1505,12 +1372,12 @@
                 this.rotation = Math.random() * 360;
                 this.rotationSpeed = Math.random() * 10 - 5;
                 this.opacity = Math.random() * 0.5 + 0.5;
-                this.shape = Math.floor(Math.random() * 3); // 0: rect, 1: circle, 2: star
+                this.shape = Math.floor(Math.random() * 3);
 
                 const colors = [
-                    '#A8E6CF', '#FFB7B2', '#FFDAC1', '#B8D4E3', '#C3AED6',
-                    '#FFD700', '#FF69B4', '#87CEEB', '#98FB98', '#DDA0DD',
-                    '#F0E68C', '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4'
+                    '#A8E6CF','#FFB7B2','#FFDAC1','#B8D4E3','#C3AED6',
+                    '#FFD700','#FF69B4','#87CEEB','#98FB98','#DDA0DD',
+                    '#F0E68C','#FF6B6B','#4ECDC4','#45B7D1','#96CEB4'
                 ];
                 this.color = colors[Math.floor(Math.random() * colors.length)];
             }
@@ -1519,10 +1386,7 @@
                 this.y += this.speedY;
                 this.x += this.speedX + Math.sin(this.y * 0.01) * 0.5;
                 this.rotation += this.rotationSpeed;
-
-                if (this.y > canvas.height + 20) {
-                    this.reset();
-                }
+                if (this.y > canvas.height + 20) this.reset();
             }
 
             draw() {
@@ -1533,64 +1397,34 @@
                 ctx.fillStyle = this.color;
 
                 if (this.shape === 0) {
-                    // Rectangle
                     ctx.fillRect(-this.size / 2, -this.size / 4, this.size, this.size / 2);
                 } else if (this.shape === 1) {
-                    // Circle
                     ctx.beginPath();
                     ctx.arc(0, 0, this.size / 2, 0, Math.PI * 2);
                     ctx.fill();
                 } else {
-                    // Star
-                    this.drawStar(0, 0, 5, this.size / 2, this.size / 4);
+                    let rot = Math.PI / 2 * 3, step = Math.PI / 5;
+                    ctx.beginPath();
+                    ctx.moveTo(0, -this.size / 2);
+                    for (let i = 0; i < 5; i++) {
+                        ctx.lineTo(Math.cos(rot) * this.size / 2, Math.sin(rot) * this.size / 2);
+                        rot += step;
+                        ctx.lineTo(Math.cos(rot) * this.size / 4, Math.sin(rot) * this.size / 4);
+                        rot += step;
+                    }
+                    ctx.closePath();
+                    ctx.fill();
                 }
-
                 ctx.restore();
-            }
-
-            drawStar(cx, cy, spikes, outerRadius, innerRadius) {
-                let rot = Math.PI / 2 * 3;
-                let x = cx;
-                let y = cy;
-                let step = Math.PI / spikes;
-
-                ctx.beginPath();
-                ctx.moveTo(cx, cy - outerRadius);
-
-                for (let i = 0; i < spikes; i++) {
-                    x = cx + Math.cos(rot) * outerRadius;
-                    y = cy + Math.sin(rot) * outerRadius;
-                    ctx.lineTo(x, y);
-                    rot += step;
-
-                    x = cx + Math.cos(rot) * innerRadius;
-                    y = cy + Math.sin(rot) * innerRadius;
-                    ctx.lineTo(x, y);
-                    rot += step;
-                }
-
-                ctx.lineTo(cx, cy - outerRadius);
-                ctx.closePath();
-                ctx.fill();
             }
         }
 
         function startConfetti() {
             confettiActive = true;
             confettiPieces = [];
-
-            for (let i = 0; i < 150; i++) {
-                confettiPieces.push(new ConfettiPiece());
-            }
-
+            for (let i = 0; i < 150; i++) confettiPieces.push(new Confetti());
             animateConfetti();
-
-            // Slow down after 5 seconds
-            setTimeout(() => {
-                confettiPieces = confettiPieces.slice(0, 50);
-            }, 5000);
-
-            // Stop after 10 seconds
+            setTimeout(() => { confettiPieces = confettiPieces.slice(0, 40); }, 5000);
             setTimeout(() => {
                 confettiActive = false;
                 confettiPieces = [];
@@ -1600,55 +1434,14 @@
 
         function animateConfetti() {
             if (!confettiActive) return;
-
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            confettiPieces.forEach(piece => {
-                piece.update();
-                piece.draw();
-            });
-
+            confettiPieces.forEach(p => { p.update(); p.draw(); });
             requestAnimationFrame(animateConfetti);
         }
 
-        // ===== CLAUSE CARDS INITIAL STATE =====
-        // They start hidden and animate in when slide 2 is visible
-        document.querySelectorAll('.clause-card').forEach(card => {
-            card.style.transition = 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-        });
-
-        // ===== KEYBOARD NAVIGATION =====
-        document.addEventListener('keydown', (e) => {
-            const currentActive = document.querySelector('.nav-dot.active');
-            const currentIndex = parseInt(currentActive?.dataset.slide || 0);
-
-            if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
-                e.preventDefault();
-                const nextIndex = Math.min(currentIndex + 1, slides.length - 1);
-                if (nextIndex === 3) {
-                    const successSlide = document.getElementById('slide-3');
-                    if (!successSlide.classList.contains('active')) return;
-                }
-                scrollToSlide(nextIndex);
-            } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
-                e.preventDefault();
-                const prevIndex = Math.max(currentIndex - 1, 0);
-                scrollToSlide(prevIndex);
-            }
-        });
-
-        // ===== TOUCH/MOBILE ENHANCEMENTS =====
-        let touchStartY = 0;
-
-        document.addEventListener('touchstart', (e) => {
-            touchStartY = e.touches[0].clientY;
-        }, { passive: true });
-
-        // ===== EASTER EGG: Click the badge to get more confetti =====
-        document.querySelector('.badge-container')?.addEventListener('click', () => {
-            if (document.getElementById('slide-3').classList.contains('active')) {
-                startConfetti();
-            }
+        // Easter egg: click badge for more confetti
+        document.getElementById('badgeClick')?.addEventListener('click', () => {
+            if (currentPage === 3) startConfetti();
         });
     </script>
 </body>
